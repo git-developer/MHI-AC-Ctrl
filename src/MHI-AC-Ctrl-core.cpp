@@ -104,6 +104,10 @@ void MHI_AC_Ctrl_Core::request_ErrOpData() {
   request_erropData = true;
 }
 
+void MHI_AC_Ctrl_Core::request_PassiveMode(bool newPassiveMode) {
+  passiveMode = newPassiveMode;
+}
+
 void MHI_AC_Ctrl_Core::set_troom(byte troom) {
   //Serial.printf("MHI_AC_Ctrl_Core::set_troom %i\n", troom);
   new_Troom = troom;
@@ -246,7 +250,7 @@ int MHI_AC_Ctrl_Core::loop(uint max_time_ms) {
         if (millis() - startMillis > max_time_ms)
           return err_msg_timeout_SCK_high;       // SCK stuck@ high error detection
       } 
-      if ((MISO_frame[byte_cnt] & bit_mask) > 0)
+      if ((MISO_frame[byte_cnt] & bit_mask) || passiveMode)
         digitalWrite(MISO_PIN, 1);
       else
         digitalWrite(MISO_PIN, 0);

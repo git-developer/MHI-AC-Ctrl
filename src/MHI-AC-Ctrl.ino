@@ -179,6 +179,15 @@ void MQTT_subscribe_callback(const char* topic, byte* payload, unsigned int leng
     else
       publish_cmd_invalidparameter();
   }
+  else if (strcmp_P(topic, PSTR(MQTT_SET_PREFIX TOPIC_REQUEST_PASSIVEMODE)) == 0) {
+    if (strcmp_P((char*)payload, PSTR(PAYLOAD_REQUEST_PASSIVEMODE_ON)) == 0) {
+      mhi_ac_ctrl_core.request_PassiveMode(true);
+    }
+    else {
+      mhi_ac_ctrl_core.request_PassiveMode(false);
+    }
+    publish_cmd_ok();
+  }
   else
     publish_cmd_unknown();
 }

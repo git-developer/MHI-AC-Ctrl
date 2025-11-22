@@ -47,6 +47,7 @@
 
 #define TOPIC_REQUEST_ERROPDATA "ErrOpData"
 #define TOPIC_REQUEST_RESET "reset"
+#define TOPIC_REQUEST_PASSIVEMODE "PassiveMode"
 
 // MQTT payload text
 #define PAYLOAD_CONNECTED_TRUE "1"
@@ -72,6 +73,8 @@
 #define PAYLOAD_VANESLR_SWING "Swing"
 #define PAYLOAD_3DAUTO_ON "On"
 #define PAYLOAD_3DAUTO_OFF "Off"
+#define PAYLOAD_REQUEST_PASSIVEMODE_ON "On"
+#define PAYLOAD_REQUEST_PASSIVEMODE_OFF "Off"
 
 enum POWER_STATUS {
     unknown,
