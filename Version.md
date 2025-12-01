@@ -2,6 +2,7 @@ MHI-AC-Ctrl by absalom-muc
 
 **Adaptions since version 2.8** (not released)
 - [Move from unmaintained knolleary/pubsubclient to hmueller01/pubsubclient3](https://github.com/absalom-muc/MHI-AC-Ctrl/pull/212)
+- [Introduce a passive mode to allow RC timer](https://github.com/absalom-muc/MHI-AC-Ctrl/pull/220)
 
 **v2.8** (September 2023)
 - when ds18x20 used and get disconnected, fallback to  IU temperature sensor by [glsf91](https://github.com/glsf91)
