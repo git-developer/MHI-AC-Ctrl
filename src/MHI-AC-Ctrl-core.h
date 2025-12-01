@@ -182,12 +182,11 @@ class MHI_AC_Ctrl_Core {
     void set_vanes(uint vanes);           // set the vanes horizontal position (or swing)
     void set_troom(byte temperature);     // set the room temperature used by AC (0xff indicates the usage of the internal room temperature sensor)
     void request_ErrOpData();             // request that the AC provides the error data
-    void request_PassiveMode(bool newPassiveMode);
     float get_troom_offset();             // get troom offset, only usefull when ENHANCED_RESOLUTION is used
     void set_troom_offset(float offset);  // set troom offset, only usefull when ENHANCED_RESOLUTION is used
     void set_frame_size(byte framesize);  // set framesize to 20 or 33
     void set_3Dauto(AC3Dauto Dauto);      // set the 3D auto mode on or off
     void set_vanesLR(uint vanesLR);       // set the vanes LR (vertical) position
-
+    void set_passive_mode(bool newMode);  // enable or disable passive mode
 
 };

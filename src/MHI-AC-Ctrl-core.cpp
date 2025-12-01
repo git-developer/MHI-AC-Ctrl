@@ -100,12 +100,12 @@ void MHI_AC_Ctrl_Core::set_vanesLR(uint vanesLR) {
   }
 }
 
-void MHI_AC_Ctrl_Core::request_ErrOpData() {
-  request_erropData = true;
+void MHI_AC_Ctrl_Core::set_passive_mode(bool newPassiveMode) {
+  passiveMode = newPassiveMode;
 }
 
-void MHI_AC_Ctrl_Core::request_PassiveMode(bool newPassiveMode) {
-  passiveMode = newPassiveMode;
+void MHI_AC_Ctrl_Core::request_ErrOpData() {
+  request_erropData = true;
 }
 
 void MHI_AC_Ctrl_Core::set_troom(byte troom) {

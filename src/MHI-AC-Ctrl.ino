@@ -181,10 +181,10 @@ void MQTT_subscribe_callback(const char* topic, byte* payload, unsigned int leng
   }
   else if (strcmp_P(topic, PSTR(MQTT_SET_PREFIX TOPIC_REQUEST_PASSIVEMODE)) == 0) {
     if (strcmp_P((char*)payload, PSTR(PAYLOAD_REQUEST_PASSIVEMODE_ON)) == 0) {
-      mhi_ac_ctrl_core.request_PassiveMode(true);
+      mhi_ac_ctrl_core.set_passive_mode(true);
     }
     else {
-      mhi_ac_ctrl_core.request_PassiveMode(false);
+      mhi_ac_ctrl_core.set_passive_mode(false);
     }
     publish_cmd_ok();
   }
