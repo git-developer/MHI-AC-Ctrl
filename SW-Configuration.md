@@ -218,6 +218,32 @@ But when you uncomment the following line, the frame size is extended to 33 byte
                                                     // Then it will be possible to get and set the 3D auto and vanes left/right
 ```
 
+## Passive Mode
+
+A [known limitation](../Troubleshooting.md#known-limitations) is
+that the timer of the IR remote control does no longer work
+as soon as a device is connected to the SPI port.
+
+There's a workaround for this limitation: toggle the AC from _active mode_ to _passive mode_.
+In _active mode_, the default behavior of MHI-AC-Ctrl,
+it is possible to both monitor and control the AC while the RC timer is not working.
+In _passive mode_, the AC is monitored but cannot be controlled, and the RC timer is working.
+
+It is possible to switch between active and passive mode via MQTT topic `set/PassiveMode`:
+publish `On` to enable and `Off` to disable passive mode.
+Both commands send an acknowledge value of `o.k.` to topic `cmd_received` on success.
+
+Enabling passive mode does not have immediate effect but involves a delay of ~2 minutes.
+Setting `PassiveMode` to `On` while the AC is running causes that after the delay,
+the AC reports a value of `1` on topic `Errorcode` and turns off.
+Now the AC is in passive mode: it cannot be controlled via MHI-AC-Ctrl anymore.
+The `Errorcode` will automatically be reset to `0` as soon as the AC it turned on next time.
+The RC timer is working now, i.e. pressing _SLEEP_ enlightens the indoor unit's orange LED.
+
+Publishing `Off` to `set/PassiveMode` enables active mode immediately.
+The RC timer is disabled and the AC can be controlled by MHI-AC-Ctrl again.
+The AC does not power off when active mode is enabled.
+
 # Advanced settings
 
 ## Topic and payload text ([MHI-AC-Ctrl.h](src/MHI-AC-Ctrl.h))
@@ -318,6 +344,7 @@ void set_tsetpoint(uint tsetpoint);   // set the target temperature of the AC)
 void set_fan(uint fan);               // set the requested fan speed
 void set_vanes(uint vanes);           // set the vanes horizontal position (or swing)
 void set_troom(byte temperature);     // set the room temperature used by AC
+void set_passive_mode(bool mode);     // enable or disable passive mode
 void request_ErrOpData();             // request that the AC provides the error data
 ```
 The following sections describe the usage of these functions.
